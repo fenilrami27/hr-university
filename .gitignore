@@ -25,14 +25,16 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Editor & IDE directories
-.vscode/*
-!.vscode/extensions.json
+.vscode/
 .idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Vercel
+.vercel
 
 # OS generated files
 .DS_Store
