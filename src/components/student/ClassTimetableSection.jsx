@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, Search, MapPin, User, AlertCircle, Calendar } from 'lucide-react';
+import { Clock, Search, MapPin } from 'lucide-react';
 import Button from '../ui/Button';
 import { branches, semesters } from '../../config/academics';
 import { studentService } from '../../services/studentService';

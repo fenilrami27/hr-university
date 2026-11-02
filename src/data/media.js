@@ -35,9 +35,9 @@ export const mediaRegistry = {
       label: 'Sports',
       title: 'Olympic Athletics & Biometrics Stadium',
       video: '/videos/hero/hero-4.mp4',
-      poster: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=1920&q=80',
+      poster: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1920&q=80',
       duration: 5500,
-      credit: { photographer: 'Gentrit Sylejmani', source: 'Unsplash' },
+      credit: { photographer: 'Braden Collum', source: 'Unsplash' },
     },
   ],
   hero: {
@@ -145,10 +145,10 @@ export const mediaRegistry = {
   placements: [
     {
       id: 'placement-1',
-      src: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80',
+      src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
       alt: 'Commencement graduation caps celebration',
       caption: 'Commencement & Signing Day',
-      credit: { photographer: 'Good Free Photos', source: 'Unsplash' },
+      credit: { photographer: 'Priscilla Du Preez', source: 'Unsplash' },
     },
     {
       id: 'placement-2',

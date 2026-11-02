@@ -47,7 +47,7 @@ export function ResultsSection({ prefillEnrollment = '', prefillBranch = 'ai-dat
         semester: selectedSemester,
       });
       setResultData(result);
-    } catch (err) {
+    } catch {
       setResultData(null);
     } finally {
       setLoading(false);

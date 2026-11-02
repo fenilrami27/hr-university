@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FileBadge, Send, Download, CheckCircle2 } from 'lucide-react';
 import Button from '../ui/Button';
 import { studentService } from '../../services/studentService';
@@ -11,13 +11,19 @@ export function CertificatesSection({ prefillEnrollment = '' }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-  const loadCertificates = async () => {
-    const data = await studentService.getCertificates({ enrollmentNo: prefillEnrollment });
+  const loadCertificates = useCallback(async () => {
+    const data = await studentService.getCertificates({ _enrollmentNo: prefillEnrollment });
     setCertificates(data || []);
-  };
+  }, [prefillEnrollment]);
 
   useEffect(() => {
-    loadCertificates();
+    let ignore = false;
+    studentService.getCertificates({ _enrollmentNo: prefillEnrollment }).then((data) => {
+      if (!ignore) setCertificates(data || []);
+    });
+    return () => {
+      ignore = true;
+    };
   }, [prefillEnrollment]);
 
   const handleSubmit = async (e) => {

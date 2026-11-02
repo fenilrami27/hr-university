@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BellRing, Search, Filter, Download, Calendar, Pin, AlertCircle } from 'lucide-react';
+import { BellRing, Search, Download, Pin } from 'lucide-react';
 import { studentService } from '../../services/studentService';
 
 export function NoticesSection() {
@@ -11,20 +11,24 @@ export function NoticesSection() {
 
   const categories = ['All', 'Examinations', 'Academic', 'Venture & Aid', 'Campus & Hostel'];
 
-  const fetchNotices = async () => {
-    setLoading(true);
-    try {
-      const data = await studentService.getNotices({ search, category, date: dateFilter });
-      setNotices(data || []);
-    } catch {
-      setNotices([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchNotices();
+    let ignore = false;
+    studentService.getNotices({ search, category, date: dateFilter })
+      .then((data) => {
+        if (!ignore) {
+          setNotices(data || []);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!ignore) {
+          setNotices([]);
+          setLoading(false);
+        }
+      });
+    return () => {
+      ignore = true;
+    };
   }, [category, search, dateFilter]);
 
   return (

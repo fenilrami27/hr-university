@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BookOpen, Search, Download, FileText } from 'lucide-react';
 import Button from '../ui/Button';
 import { branches, semesters } from '../../config/academics';
@@ -11,8 +11,8 @@ export function SyllabusSection({ prefillBranch = 'ai-data-science', prefillSeme
   const [syllabusList, setSyllabusList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handleQuery = async (e) => {
-    if (e) e.preventDefault();
+  const handleQuery = useCallback(async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
     setLoading(true);
     try {
       const data = await studentService.getSyllabusAndMaterial({
@@ -26,14 +26,29 @@ export function SyllabusSection({ prefillBranch = 'ai-data-science', prefillSeme
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedBranch, selectedSemester, subjectQuery]);
 
   useEffect(() => {
     // Initial fetch if demo mode is enabled
-    if (studentService.isDemoMode()) {
-      handleQuery();
-    }
-  }, []);
+    if (!studentService.isDemoMode()) return;
+    let ignore = false;
+    studentService.getSyllabusAndMaterial({
+      branch: selectedBranch,
+      semester: selectedSemester,
+      subject: subjectQuery,
+    }).then((data) => {
+      if (!ignore) {
+        setSyllabusList(data || []);
+      }
+    }).catch(() => {
+      if (!ignore) {
+        setSyllabusList([]);
+      }
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [selectedBranch, selectedSemester, subjectQuery]);
 
   return (
     <section id="syllabus" className="mb-20 scroll-mt-32">

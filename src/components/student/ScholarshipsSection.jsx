@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GraduationCap, Search, Award, CheckCircle2 } from 'lucide-react';
+import { GraduationCap, Search } from 'lucide-react';
 import Button from '../ui/Button';
 import { validateEnrollmentNumber } from '../../config/academics';
 import { studentService } from '../../services/studentService';

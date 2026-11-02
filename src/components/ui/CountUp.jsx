@@ -22,6 +22,7 @@ export function CountUp({
 }) {
   const [currentValue, setCurrentValue] = useState(from);
   const elementRef = useRef(null);
+  const textRef = useRef(null);
   const hasAnimatedRef = useRef(false);
   const isAnimatingRef = useRef(false);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -40,9 +41,20 @@ export function CountUp({
     [decimals]
   );
 
+  const formatValue = useCallback(
+    (val) => {
+      const formatted = formatEnIn ? formatter.format(val) : val.toLocaleString();
+      return `${prefix}${formatted}${suffix}`;
+    },
+    [formatEnIn, formatter, prefix, suffix]
+  );
+
   const startAnimation = useCallback(() => {
     if (prefersReducedMotion) {
       setCurrentValue(to);
+      if (textRef.current) {
+        textRef.current.textContent = formatValue(to);
+      }
       if (onCompleteRef.current) {
         onCompleteRef.current();
       }
@@ -58,10 +70,11 @@ export function CountUp({
       const easedProgress = easeOutExpo(progress);
       const rawVal = from + (to - from) * easedProgress;
 
-      if (decimals > 0) {
-        setCurrentValue(Number(rawVal.toFixed(decimals)));
-      } else {
-        setCurrentValue(Math.round(rawVal));
+      const currentNum = decimals > 0 ? Number(rawVal.toFixed(decimals)) : Math.round(rawVal);
+
+      // Direct DOM update: 0 React re-renders during high-frequency animation loop
+      if (textRef.current) {
+        textRef.current.textContent = formatValue(currentNum);
       }
 
       if (progress < 1) {
@@ -69,6 +82,9 @@ export function CountUp({
       } else {
         isAnimatingRef.current = false;
         setCurrentValue(to);
+        if (textRef.current) {
+          textRef.current.textContent = formatValue(to);
+        }
         if (onCompleteRef.current) {
           onCompleteRef.current();
         }
@@ -76,7 +92,7 @@ export function CountUp({
     };
 
     requestAnimationFrame(step);
-  }, [to, from, duration, decimals, prefersReducedMotion]);
+  }, [to, from, duration, decimals, prefersReducedMotion, formatValue]);
 
   // Initial IntersectionObserver trigger
   useEffect(() => {
@@ -104,22 +120,20 @@ export function CountUp({
   // Replay when replayTrigger changes
   useEffect(() => {
     if (replayTrigger !== undefined && hasAnimatedRef.current) {
+      if (textRef.current) textRef.current.textContent = formatValue(from);
       setCurrentValue(from);
       startAnimation();
     }
-  }, [replayTrigger, from, startAnimation]);
+  }, [replayTrigger, from, startAnimation, formatValue]);
 
   const handleClick = (e) => {
     if (replayOnClick && !isAnimatingRef.current) {
       e.stopPropagation();
+      if (textRef.current) textRef.current.textContent = formatValue(from);
       setCurrentValue(from);
       startAnimation();
     }
   };
-
-  const formattedDisplay = formatEnIn
-    ? formatter.format(currentValue)
-    : currentValue.toLocaleString();
 
   const finalFormatted = formatEnIn
     ? formatter.format(to)
@@ -133,9 +147,9 @@ export function CountUp({
       aria-label={`${prefix}${finalFormatted}${suffix}`}
       title={replayOnClick ? 'Click to replay counter' : undefined}
     >
-      {prefix}
-      {formattedDisplay}
-      {suffix}
+      <span ref={textRef}>
+        {formatValue(currentValue)}
+      </span>
     </span>
   );
 }

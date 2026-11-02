@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { RotateCcw, Send, CheckCircle2, FileSearch, Clock } from 'lucide-react';
 import Button from '../ui/Button';
 import { validateEnrollmentNumber } from '../../config/academics';
@@ -13,13 +13,19 @@ export function ReEvaluationSection({ prefillEnrollment = '' }) {
   const [successMessage, setSuccessMessage] = useState(null);
   const [pastRequests, setPastRequests] = useState([]);
 
-  const loadRequests = async () => {
+  const loadRequests = useCallback(async () => {
     const list = await studentService.getReEvaluations();
     setPastRequests(list || []);
-  };
+  }, []);
 
   useEffect(() => {
-    loadRequests();
+    let ignore = false;
+    studentService.getReEvaluations().then((list) => {
+      if (!ignore) setPastRequests(list || []);
+    });
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   const handleSubmit = async (e) => {

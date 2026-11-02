@@ -39,16 +39,16 @@ export function Preloader({ onComplete }) {
     // Lock scroll during preloader
     document.body.style.overflow = 'hidden';
 
-    // 6-second absolute failsafe: even if any script hangs, preloader MUST finish
+    // 3-second absolute failsafe: even if any script hangs, preloader MUST finish
     const failsafeTimeout = setTimeout(() => {
       handleFinish();
-    }, 6000);
+    }, 3000);
 
-    // Fast 1s fade for prefers-reduced-motion
+    // Fast 0.5s fade for prefers-reduced-motion
     if (prefersReducedMotion) {
       const timer = setTimeout(() => {
         handleFinish();
-      }, 1000);
+      }, 500);
       return () => {
         clearTimeout(timer);
         clearTimeout(failsafeTimeout);
@@ -58,25 +58,32 @@ export function Preloader({ onComplete }) {
 
     const startTime = performance.now();
     let animFrame;
+    let lastUpdate = 0;
 
     const tick = (now) => {
       const elapsed = now - startTime;
 
-      // Phase 1: 0 to 1.4s (count 0 -> ~35 in center)
-      if (elapsed < 1400) {
+      // Phase 1: 0 to 400ms (count 0 -> ~40 in center)
+      if (elapsed < 400) {
         setPhase('initial');
-        const p1 = elapsed / 1400;
-        setCount(Math.min(Math.round(p1 * 35), 35));
+        if (now - lastUpdate > 30) {
+          const p1 = elapsed / 400;
+          setCount(Math.min(Math.round(p1 * 40), 40));
+          lastUpdate = now;
+        }
       }
-      // Phase 2: 1.4s to 4.0s (counter glides to bottom & counts 35 -> 100)
-      else if (elapsed < 4000) {
+      // Phase 2: 400ms to 1100ms (counter glides to bottom & counts 40 -> 100)
+      else if (elapsed < 1100) {
         setPhase('gliding');
-        const p2 = (elapsed - 1400) / 2600;
-        const currentCount = Math.min(Math.round(35 + p2 * 65), 100);
-        setCount(currentCount);
+        if (now - lastUpdate > 30) {
+          const p2 = (elapsed - 400) / 700;
+          const currentCount = Math.min(Math.round(40 + p2 * 60), 100);
+          setCount(currentCount);
+          lastUpdate = now;
+        }
       }
-      // Phase 3: 4.0s to 4.8s (reveal / split curtain)
-      else if (elapsed < 4800) {
+      // Phase 3: 1100ms to 1400ms (reveal / split curtain)
+      else if (elapsed < 1400) {
         setPhase('revealing');
         setCount(100);
       } else {

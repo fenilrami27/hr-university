@@ -84,7 +84,7 @@ export function StatsSection() {
       badgeBg: 'bg-[#0A0B1E]/15 text-[#0A0B1E] border-[#0A0B1E]/20',
       icon: TrendingUp,
       iconBg: 'bg-[#0A0B1E]/15 text-[#0A0B1E]',
-      photo: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80',
+      photo: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
       photoAlt: 'Graduation celebration and commencement',
       confettiColors: ['#F472B6', '#FF7A59', '#FB7185', '#FFFFFF'],
     },
@@ -93,7 +93,7 @@ export function StatsSection() {
   const chips = [
     { text: '999+ Builders', color: 'bg-[#FFC53D]/15 text-[#FFC53D] border-[#FFC53D]/30', thumb: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=100&q=80' },
     { text: '120+ Studio Tracks', color: 'bg-[#22D3EE]/15 text-[#22D3EE] border-[#22D3EE]/30', thumb: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=100&q=80' },
-    { text: '₹14.5 LPA Avg CTC', color: 'bg-[#C6FF3D]/15 text-[#A3E635] border-[#C6FF3D]/30', thumb: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=100&q=80' },
+    { text: '₹14.5 LPA Avg CTC', color: 'bg-[#C6FF3D]/15 text-[#A3E635] border-[#C6FF3D]/30', thumb: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=100&q=80' },
     { text: '50+ Global Nationalities', color: 'bg-[#2DD4BF]/15 text-[#2DD4BF] border-[#2DD4BF]/30', thumb: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=100&q=80' },
     { text: '₹50 Cr Venture Grants', color: 'bg-[#F472B6]/15 text-[#F472B6] border-[#F472B6]/30', thumb: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=100&q=80' },
     { text: '18 Active Patents', color: 'bg-[#A78BFA]/15 text-[#A78BFA] border-[#A78BFA]/30', thumb: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=100&q=80' },

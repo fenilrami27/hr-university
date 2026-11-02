@@ -39,17 +39,31 @@ export function App() {
   const [hasLoaded, setHasLoaded] = useState(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      return params.has('nointro') || params.get('intro') === 'false';
+      if (params.has('nointro') || params.get('intro') === 'false') return true;
+      try {
+        return sessionStorage.getItem('hru_preloader_seen') === 'true';
+      } catch {
+        return false;
+      }
     }
     return false;
   });
+
+  const handlePreloaderComplete = () => {
+    setHasLoaded(true);
+    try {
+      sessionStorage.setItem('hru_preloader_seen', 'true');
+    } catch {
+      // ignore
+    }
+  };
 
   return (
     <ErrorBoundary name="Application Root Wrapper">
       {/* Signature Motion: Preloader counter 0 to 100 with wipe up */}
       {!hasLoaded && (
         <ErrorBoundary name="Preloader" fallback={null}>
-          <Preloader onComplete={() => setHasLoaded(true)} />
+          <Preloader onComplete={handlePreloaderComplete} />
         </ErrorBoundary>
       )}
 

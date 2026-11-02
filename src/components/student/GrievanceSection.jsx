@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { LifeBuoy, Send, CheckCircle2, AlertCircle, Clock, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { LifeBuoy, Send, CheckCircle2 } from 'lucide-react';
 import Button from '../ui/Button';
 import { studentService } from '../../services/studentService';
 
@@ -12,13 +12,19 @@ export function GrievanceSection() {
   const [newTicket, setNewTicket] = useState(null);
   const [tickets, setTickets] = useState([]);
 
-  const loadTickets = async () => {
+  const loadTickets = useCallback(async () => {
     const list = await studentService.getGrievances();
     setTickets(list || []);
-  };
+  }, []);
 
   useEffect(() => {
-    loadTickets();
+    let mounted = true;
+    studentService.getGrievances().then((list) => {
+      if (mounted) setTickets(list || []);
+    });
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const handleSubmit = async (e) => {

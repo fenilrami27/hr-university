@@ -50,7 +50,7 @@ export function ExamScheduleSection({ prefillEnrollment = '', prefillBranch = 'a
         semester: selectedSemester,
       });
       setScheduleData(result);
-    } catch (err) {
+    } catch {
       setScheduleData(null);
     } finally {
       setLoading(false);

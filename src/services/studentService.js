@@ -23,7 +23,7 @@ import {
   demoDownloads,
 } from '../data/studentDemoData';
 
-const delay = (ms = 250) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms = 20) => new Promise((resolve) => setTimeout(resolve, Math.min(ms, 20)));
 
 const isDemoActive = () => {
   return import.meta.env.VITE_USE_DEMO_DATA === 'true';
@@ -190,7 +190,7 @@ export const studentService = {
   },
 
   // C9) Re-evaluation / Supplementary Form Submission
-  submitReEvaluation: async ({ enrollmentNo, subjectCode, type, reason }) => {
+  submitReEvaluation: async ({ _enrollmentNo, subjectCode, type, reason }) => {
     await delay(300);
     const submissionId = `REV-2026-${Math.floor(1000 + Math.random() * 9000)}`;
     const record = {
@@ -215,7 +215,7 @@ export const studentService = {
   },
 
   // C10) Certificates & Forms
-  getCertificates: async ({ enrollmentNo }) => {
+  getCertificates: async ({ _enrollmentNo } = {}) => {
     await delay(200);
     if (!isDemoActive() && sessionStore.certificates.length === demoCertificates.length) {
       return [];

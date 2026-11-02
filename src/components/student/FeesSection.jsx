@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Search, Download, CheckCircle2, AlertCircle, Receipt } from 'lucide-react';
+import { CreditCard, Search, Receipt } from 'lucide-react';
 import Button from '../ui/Button';
 import { validateEnrollmentNumber } from '../../config/academics';
 import { studentService } from '../../services/studentService';

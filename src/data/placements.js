@@ -249,7 +249,7 @@ export const placementJourneySteps = [
 export const placementBentoPhotos = [
   {
     id: 'photo-1',
-    src: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80',
+    src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
     alt: 'Commencement and graduation celebration caps toss',
     caption: 'Commencement Ceremony',
     mask: 'arch', // arch-masked

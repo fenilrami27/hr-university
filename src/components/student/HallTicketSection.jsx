@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Ticket, Search, Download, Printer, AlertCircle, QrCode, ShieldCheck, Calendar, UserCheck } from 'lucide-react';
+import { Ticket, Search, Download, Printer, AlertCircle, ShieldCheck } from 'lucide-react';
 import Button from '../ui/Button';
 import { validateEnrollmentNumber } from '../../config/academics';
 import { studentService } from '../../services/studentService';

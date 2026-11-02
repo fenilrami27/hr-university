@@ -19,7 +19,6 @@ import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 export function HeroSection() {
   const [activeClipIndex, setActiveClipIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -28,30 +27,20 @@ export function HeroSection() {
   const currentClip = reel[activeClipIndex];
   const videoRef = useRef(null);
 
-  // Reel timer: cycle through 4 clips every 5.5s
+  // Single clean timeout for clip transition: advances once every 5.5s (Zero 50ms re-render hammering)
   useEffect(() => {
     if (prefersReducedMotion) return;
 
     const duration = currentClip.duration || 5500;
-    const intervalTime = 50;
-    const increment = (intervalTime / duration) * 100;
+    const timer = setTimeout(() => {
+      setActiveClipIndex((current) => (current + 1) % reel.length);
+    }, duration);
 
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveClipIndex((current) => (current + 1) % reel.length);
-          return 0;
-        }
-        return prev + increment;
-      });
-    }, intervalTime);
-
-    return () => clearInterval(timer);
+    return () => clearTimeout(timer);
   }, [activeClipIndex, prefersReducedMotion, reel.length, currentClip.duration]);
 
   const handleSelectClip = (index) => {
     setActiveClipIndex(index);
-    setProgress(0);
   };
 
   return (
@@ -101,6 +90,8 @@ export function HeroSection() {
                 <img
                   src={currentClip.poster}
                   alt={currentClip.title}
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full h-full object-cover filter brightness-[0.36]"
                 />
               </motion.div>
@@ -332,13 +323,22 @@ export function HeroSection() {
                   aria-label={`Jump to ${clip.label} reel`}
                 >
                   <div className="h-1 rounded-full bg-white/20 overflow-hidden relative">
-                    <div
-                      className="h-full bg-hru-gold transition-all"
-                      style={{
-                        width: isPast ? '100%' : isActive ? `${progress}%` : '0%',
-                        transition: isActive ? 'width 50ms linear' : 'none',
-                      }}
-                    />
+                    {isActive ? (
+                      <motion.div
+                        key={`pip-active-${activeClipIndex}`}
+                        className="h-full bg-hru-gold"
+                        initial={{ width: '0%' }}
+                        animate={{ width: '100%' }}
+                        transition={{
+                          duration: prefersReducedMotion ? 0 : (currentClip.duration || 5500) / 1000,
+                          ease: 'linear',
+                        }}
+                      />
+                    ) : (
+                      <div
+                        className={`h-full ${isPast ? 'bg-hru-gold w-full' : 'w-0'}`}
+                      />
+                    )}
                   </div>
                   <span className={`text-[10px] font-mono uppercase tracking-wider block text-center mt-1.5 transition-colors ${
                     isActive ? 'text-hru-gold font-bold' : 'text-[#A4A8C4] group-hover:text-white'
