@@ -3,7 +3,7 @@
 > Gen-Z styled university website built with React and Vite.
 
 ## 🌐 Live Demo
-- **Production URL**: Deployment in progress (link will be updated upon Vercel deployment)
+- **Production URL**: [https://university-ten-drab.vercel.app](https://university-ten-drab.vercel.app)
 
 ---
 
