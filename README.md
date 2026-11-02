@@ -1,67 +1,55 @@
-# HR University (HRU) — Official Web Portal
+# HR University (HRU)
 
-> **HR University (HRU)** is an institution dedicated to cutting-edge research, interdisciplinary technology, and transformative higher education. This repository contains the complete frontend web portal and interactive user interface.
+> Gen-Z styled university website built with React and Vite.
 
-[![React](https://img.shields.io/badge/React-18.3.1-blue?logo=react)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8.3.5-646CFF?logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4.19-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red)](./LICENSE)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)]()
+## 🌐 Live Demo
+- **Production URL**: Deployment in progress (link will be updated upon Vercel deployment)
 
 ---
 
 ## 🏛️ Project Overview
+HR University is a modern, interactive university portal delivering a responsive campus experience for prospective students, faculty, recruiters, and visitors. Built with React and Vite, the platform combines fluid animations with high performance and accessibility across desktop and mobile devices.
 
-The HR University web portal delivers a modern, high-performance, and immersive campus experience for prospective students, faculty, recruiters, and alumni. Built with React and styled using Tailwind CSS and Framer Motion, it balances smooth animations with fast load times and clean responsiveness across mobile, tablet, and ultra-wide screens.
+> **Note on Architecture & Demo Data**:
+> This website currently runs on client-side demo data. The API backend lives in the separate repository: [**hr-university-backend**](https://github.com/fenilrami27/hr-university-backend). Admissions and enquiry forms run in client demo mode until the backend service is hosted and connected.
 
 ---
 
-## ✨ Key Features
-
-- **Cinematic Animated Intro & Hero**: Dynamic video backdrop with fallback visuals, customizable intro screen sequence, and smooth entrance transitions powered by Framer Motion.
-- **Live Dynamic Counters & Stats**: Animated real-time metrics for campus enrollment, faculty-to-student ratios, patent filings, research grants, and placement rates.
-- **Interactive Admissions & Eligibility**: Step-by-step admissions application form with field validation, scholarship calculators, fee structures, and application deadline timelines.
-- **Academic Programs & Departments**: In-depth department showcases covering Artificial Intelligence, Computer Science & Systems, Paramedical & Pharmaceutical Sciences, Sports Science & Biomechanics, Architecture, and Business & Venture Strategy.
-- **Campus Life & Virtual Tour**: Interactive campus facilities explorer highlighting research supercomputing clusters, aeroponic biodomes, makerspaces, esports arenas, and student libraries.
-- **Events & Festival Calendar**: Comprehensive cultural, technical, and sports calendar (Navratri Garba Raas, HackHRU Hackathon, Diwali Deepotsav, HRU Fest, Academic Conclaves) with dedicated event detail views and filterable categories.
-- **Placements & Recruiter Network**: Transparent placement statistics, tier-1 recruiting partner directories, student package percentiles, and recruiter enquiry flows.
-- **Student Portal & Academic Updates**: Real-time notifications for timetable releases, exam admit cards, SLURM cluster credentials, and academic results.
+## ✨ Features
+- **Cinematic Animated Intro & Hero**: Dynamic video backdrop with fallback visuals, customizable intro sequence, and entrance transitions powered by Framer Motion.
+- **Dynamic Counters & Stats**: Animated metrics for campus enrollment, faculty-to-student ratios, patent filings, research grants, and placement rates.
+- **Interactive Admissions & Eligibility**: Step-by-step admissions application form with field validation, scholarship calculator, fee structures, and application timelines.
+- **Academic Programs & Departments**: In-depth department showcases covering AI, Computer Science & Systems, Paramedical & Pharmaceutical Sciences, Sports Science & Biomechanics, Architecture, and Business & Venture Strategy.
+- **Campus Life & Virtual Tour**: Interactive campus facilities explorer highlighting research supercomputing clusters, aeroponic biodomes, makerspaces, esports arenas, and libraries.
+- **Events & Festival Calendar**: Cultural, technical, and sports calendar (Navratri Garba Raas, HackHRU Hackathon, Diwali Deepotsav, Academic Conclaves) with dedicated detail views.
+- **Placements & Recruiter Network**: Placement statistics, tier-1 recruiting partner directories, student package percentiles, and recruiter enquiry flows.
+- **Student Portal & Academic Updates**: Real-time mock dashboard for timetable releases, exam admit cards, SLURM cluster credentials, and academic results.
 - **Accessible & Responsive**: Fully responsive layout with custom toast alerts, interactive modal lightboxes, and keyboard navigation.
 
 ---
 
 ## 🛠️ Tech Stack
-
-- **Framework**: [React 18](https://react.dev/) (Single Page Application with React Router v7)
-- **Build Tool**: [Vite 8](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS 3](https://tailwindcss.com/) with custom brand design tokens & dark-first color schemes
-- **Animation & Transitions**: [Framer Motion](https://www.framer.com/motion/), [GSAP](https://gsap.com/), and [Lenis](https://lenis.darkroom.engineering/) smooth scroll
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Micro-Interactions**: [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
-- **Linter & Code Quality**: [Oxlint](https://oxc.rs/)
+- **Framework**: [React 18.3.1](https://react.dev/) (Single Page Application with React Router v7)
+- **Build Tool**: [Vite 8.3.5](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS 3.4.19](https://tailwindcss.com/)
+- **Animation & Transitions**: [Framer Motion 14.7.1](https://www.framer.com/motion/), [GSAP 3.15.0](https://gsap.com/), and [Lenis 1.3.27](https://lenis.darkroom.engineering/)
+- **Icons**: [Lucide React 1.63.0](https://lucide.dev/)
+- **Micro-Interactions**: [Canvas Confetti 1.9.4](https://www.npmjs.com/package/canvas-confetti)
+- **Linter & Code Quality**: [Oxlint 1.89.0](https://oxc.rs/)
 
 ---
 
 ## 📂 Project Structure
-
 ```text
 hr-university/
 ├── public/                 # Static assets (favicons, SVG icons, event photography)
-│   ├── favicon.svg
-│   ├── icons.svg
-│   └── images/events/      # Public-domain & verified CC-licensed event images
 ├── src/
 │   ├── assets/             # Branding assets, vector doodles, and icons
-│   ├── components/         # Modular, reusable UI components
-│   │   ├── common/         # Buttons, badges, cards, toasts, lightboxes
-│   │   ├── layout/         # Navigation bar, mobile drawer, footer
-│   │   ├── placements/     # Placement metrics, recruiter cards
-│   │   ├── student/        # Student portal dashboard & notification widgets
-│   │   └── ui/             # Headings, animated counters, motion wrappers
+│   ├── components/         # Reusable UI components (layout, common, ui, student)
 │   ├── config/             # Navigation links, academic calendars, portal config
-│   ├── data/               # University structured data (departments, events, placements)
+│   ├── data/               # Structured university data (departments, events, placements)
 │   ├── lib/                # Motion presets, animation helpers, utility functions
-│   ├── pages/              # Routed page views (Home, Admissions, Departments, Events, etc.)
+│   ├── pages/              # Routed views (Home, Admissions, Departments, Events, etc.)
 │   ├── sections/           # Modular landing page sections (Hero, Stats, Research, Life)
 │   ├── services/           # API integration stubs (ready for backend connection)
 │   ├── styles/             # Global CSS and custom design tokens
@@ -70,10 +58,9 @@ hr-university/
 ├── .env.example            # Environment configuration template
 ├── .gitignore              # Ignored files (node_modules, build artifacts, secrets)
 ├── package.json            # Project dependencies and script definitions
+├── vercel.json             # Vercel deployment routing and cache headers
 ├── tailwind.config.js      # Tailwind CSS theme configuration
 ├── vite.config.js          # Vite build and development configuration
-├── LICENSE                 # Proprietary source-available license
-├── CREDITS.md              # Image and media attribution registry
 └── README.md               # Repository documentation
 ```
 
@@ -81,96 +68,43 @@ hr-university/
 
 ## 🚀 Getting Started
 
-Follow these steps to run the HR University frontend locally:
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
+- `npm` (v9.0.0 or higher)
 
-### 1. Prerequisites
-
-Ensure you have [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended) and `npm` installed.
-
+### 1. Installation
 ```bash
-node --version
-npm --version
-```
-
-### 2. Installation
-
-Clone the repository and install all required dependencies:
-
-```bash
-git clone https://github.com/fenilrami27/hr-university-website.git
-cd hr-university-website
+git clone https://github.com/fenilrami27/hr-university.git
+cd hr-university
 npm install
 ```
 
-### 3. Environment Setup (Optional)
-
-Copy the sample environment file to activate optional student demo fixtures:
-
+### 2. Environment Setup (Optional)
 ```bash
 cp .env.example .env
 ```
 
-| Variable | Default | Purpose |
-| :--- | :--- | :--- |
-| `VITE_USE_DEMO_DATA` | `false` | When `true`, populates the student portal with demo academic records |
-
-### 4. Run Development Server
-
-Start the local Vite development server:
-
+### 3. Run Development Server
 ```bash
 npm run dev
 ```
+The development server starts on `http://localhost:5173` (or `http://localhost:5174` if 5173 is busy).
 
-Open your browser at `http://localhost:5173` (or `http://localhost:5174`).
-
-### 5. Production Build
-
-To generate an optimized production bundle:
-
+### 4. Production Build & Preview
 ```bash
 npm run build
-```
-
-Preview the production build locally:
-
-```bash
 npm run preview
 ```
 
 ---
 
-## 📸 Screenshots
-
-<!-- Place UI screenshots in qa/screenshots or assets/screenshots and link them below -->
-
-| Landing Page & Hero | Events & Festivals |
-| :---: | :---: |
-| ![HRU Campus Landing Page](qa/screenshots/home-desktop.png) | ![HRU Events Calendar](qa/screenshots/events-desktop.png) |
-
-| Academic Departments | Admissions Portal |
-| :---: | :---: |
-| ![HRU Academic Departments](qa/screenshots/departments-ultrawide.png) | ![HRU Admissions Application](qa/screenshots/admissions-ultrawide.png) |
+## 🚀 Deployment
+This frontend is configured for deployment on [Vercel](https://vercel.com).
+- **SPA Rewrites**: `vercel.json` routes all requests to `/index.html` to enable client-side routing on direct navigation or page refresh.
+- **Cache Control**: Immutable long-term caching configured for `/assets/*` static bundles.
+- **Security Headers**: Standard security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`) are attached to responses.
 
 ---
 
-## 🗺️ Roadmap
-
-- [x] **Phase 1: Frontend UI Architecture** — Responsive landing page, animated hero, interactive departments, events catalog, dynamic stat counters.
-- [x] **Phase 2: Academic & Student Portals** — Admissions eligibility checker, student notices feed, virtual tour.
-- [ ] **Phase 3: Backend Services (Coming Soon)**:
-  - Centralized REST/GraphQL API for dynamic event registrations and updates.
-  - Secure student authentication and role-based access control (RBAC).
-  - Admissions application processing pipeline and document uploads.
-  - Placement recruitment partner management and interview scheduler.
-  - Real-time notification webhooks for timetable and exam results.
-
----
-
-## 📄 License & Attribution
-
-Copyright © 2026 **Wings Women's Foundation**. All Rights Reserved.
-
-This project is made publicly viewable for demonstration, inspection, and portfolio purposes. No distribution, commercial reproduction, or unauthorized duplication is allowed. See [`LICENSE`](./LICENSE) for terms.
-
-Media and photo attributions are listed in [`CREDITS.md`](./CREDITS.md) and [`IMAGE_CREDITS.md`](./IMAGE_CREDITS.md).
+## 📄 Disclaimer & Copyright
+© HR University demo project. All rights reserved. Images and videos are placeholders.
